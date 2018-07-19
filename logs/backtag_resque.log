@@ -1,0 +1,11 @@
+# Logfile created on 2018-07-19 15:44:39 -0700 by logger.rb/56815
+I, [2018-07-19T15:44:39.911203 #9616]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
+I, [2018-07-19T15:45:36.836756 #9625]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
+E, [2018-07-19T15:55:00.970871 #9733] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<SocketError: Failed to open TCP connection to .myshopify.com:443 (getaddrinfo: nodename nor servname provided, or not known)>
+E, [2018-07-19T15:56:16.469247 #9742] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<SocketError: Failed to open TCP connection to .myshopify.com:443 (getaddrinfo: nodename nor servname provided, or not known)>
+E, [2018-07-19T15:57:24.625531 #9793] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<SocketError: Failed to open TCP connection to .myshopify.com:443 (getaddrinfo: nodename nor servname provided, or not known)>
+E, [2018-07-19T15:58:27.684201 #9801] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<SocketError: Failed to open TCP connection to .myshopify.com:443 (getaddrinfo: nodename nor servname provided, or not known)>
+E, [2018-07-19T16:07:57.876192 #9814] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<SystemExit: exit>
+E, [2018-07-19T16:28:38.735414 #10152] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<NoMethodError: undefined method `split' for nil:NilClass>
+I, [2018-07-19T16:43:08.745827 #10315]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
+I, [2018-07-19T16:48:02.384978 #10341]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])

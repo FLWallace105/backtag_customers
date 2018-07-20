@@ -38,12 +38,14 @@ module ResqueBackTag
         my_start = Time.now
         tag_customers.each do |cust|
             puts "Shopify Customer ID for this record = #{cust.shopify_customer_id}"
+            Resque.logger.info "Shopify Customer ID for this record = #{cust.shopify_customer_id}"
             if !cust.shopify_customer_id.nil?
                 local_customer = ShopifyAPI::Customer.find(cust.shopify_customer_id)
                 my_local_update_decision = update_customer_tags(cust.shopify_tags)
                 puts my_local_update_decision.inspect
                 if my_local_update_decision['update_tags_shopify'] == false
                     puts "Not updating tags for this Shopify customer they already have the recurring_subscription tag"
+                    Resque.logger.info "Not updating tags for this Shopify customer they already have the recurring_subscription tag"
                 else
                     local_customer.tags = my_local_update_decision['tags']
                     local_customer.save
@@ -51,25 +53,31 @@ module ResqueBackTag
                     cust.is_tag_updated = true
                     cust.save
                     puts "Saving new recurring_subscription tag to customer on Shopify!"
+                    Resque.logger.info "Saving new recurring_subscription tag to customer on Shopify!"
                 end
                 #puts local_customer.inspect
             else
                 puts "No customer_id for this record"
+                Resque.logger.info "No customer_id for this record"
 
             end
             sleep 4
             my_end = Time.now
             duration = (my_end - my_start).ceil
             puts "Running #{duration} seconds"
+            Resque.logger.info "Running #{duration} seconds"
             if duration > 480
                 puts "Working more than 8 minutes, must exit"
+                Resque.logger.info "Working more than 8 minutes, must exit"
                 exit
             else
                 puts "Continuing on."
+                Resque.logger.info "Continuing on."
             end
 
         end
         puts "All done with updating customers tags"
+        Resque.logger.info "All done with updating customers tags"
 
     end
 

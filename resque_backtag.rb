@@ -13,8 +13,11 @@ module ResqueBackTag
 
     def update_customer_tags(customer_tags)
         my_local_hash = Hash.new
-        my_tag_array = customer_tags.split(", ")
-        puts my_tag_array.inspect
+        my_tag_array = Array.new
+        if !customer_tags.nil?
+            my_tag_array = customer_tags.split(", ")
+            puts my_tag_array.inspect
+        end
         if my_tag_array.include? "recurring_subscription"
             my_local_hash = {"update_tags_shopify" => false, "tags" => customer_tags}
         else

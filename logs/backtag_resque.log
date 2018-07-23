@@ -9,3 +9,9 @@ E, [2018-07-19T16:07:57.876192 #9814] ERROR -- : (Job{back_tag_cust} | BackTag::
 E, [2018-07-19T16:28:38.735414 #10152] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<NoMethodError: undefined method `split' for nil:NilClass>
 I, [2018-07-19T16:43:08.745827 #10315]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
 I, [2018-07-19T16:48:02.384978 #10341]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
+I, [2018-07-23T14:36:17.109863 #5763]  INFO -- : Shopify Customer ID for this record = 651284250716
+I, [2018-07-23T14:36:18.338375 #5763]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-23T14:36:22.339104 #5763]  INFO -- : Running 6 seconds
+I, [2018-07-23T14:36:22.339565 #5763]  INFO -- : Continuing on.
+I, [2018-07-23T14:36:22.339919 #5763]  INFO -- : All done with updating customers tags
+I, [2018-07-23T14:36:22.340450 #5763]  INFO -- : done: (Job{back_tag_only_customers} | BackTag::UpdateTag::BackTagOnlyCustomers | [])

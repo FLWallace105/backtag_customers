@@ -81,6 +81,65 @@ module ResqueBackTag
 
     end
 
+    def backtag_only_cust
+        apikey = ENV['SHOPIFY_API_KEY']
+        shopname = ENV['SHOPIFY_SHOP_NAME']
+        password = ENV['SHOPIFY_PASSWORD']
+        Resque.logger = Logger.new("#{Dir.getwd}/logs/backtag_resque.log")
+        
+        ShopifyAPI::Base.site = "https://#{apikey}:#{password}@#{shopname}.myshopify.com/admin"
+        tag_customers = CustomerTagSubscriptions.where("is_tag_updated = ?", false)
+        my_start = Time.now
+
+        tag_customers.each do |cust|
+            puts "Shopify Customer ID for this record = #{cust.shopify_customer_id}"
+            Resque.logger.info "Shopify Customer ID for this record = #{cust.shopify_customer_id}"
+            if !cust.shopify_customer_id.nil?
+                local_tags = cust.shopify_tags
+                if local_tags.nil?
+                    local_tags = "recurring_subscription"
+                else
+                    local_tags = local_tags << ", recurring_subscription"
+
+                end
+                #Now update Shopify
+                local_customer = ShopifyAPI::Customer.find(cust.shopify_customer_id)
+                local_customer.tags = local_tags
+                local_customer.save
+                cust.tag_updated_at = Time.now
+                cust.is_tag_updated = true
+                cust.save
+                puts "Saving new recurring_subscription tag to customer on Shopify!"
+                Resque.logger.info "Saving new recurring_subscription tag to customer on Shopify!"
+
+            else
+                puts "Cannot update this subscription -- no matching shopify customer id"
+                Resque.logger.info "Cannot update this subscription -- no matching shopify customer id"
+            end
+            #end of saving stuff to Shopify and local DB
+            sleep 4
+            my_end = Time.now
+            duration = (my_end - my_start).ceil
+            puts "Running #{duration} seconds"
+            Resque.logger.info "Running #{duration} seconds"
+            if duration > 480
+                puts "Working more than 8 minutes, must exit"
+                Resque.logger.info "Working more than 8 minutes, must exit"
+                exit
+            else
+                puts "Continuing on."
+                Resque.logger.info "Continuing on."
+            end
+
+        
+        end
+        puts "All done with updating customers tags"
+        Resque.logger.info "All done with updating customers tags"
+
+
+
+    end
+
 
 
 end

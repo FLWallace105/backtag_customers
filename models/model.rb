@@ -6,3 +6,7 @@ class Subscriptions < ActiveRecord::Base
     self.table_name = "subscriptions"
 
 end
+
+class ShopifyCustomersTags < ActiveRecord::Base
+  self.table_name = "shopify_customers"
+end

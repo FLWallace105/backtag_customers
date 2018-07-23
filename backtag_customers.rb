@@ -49,6 +49,10 @@ module BackTag
             customer_count = ShopifyAPI::Customer.count
             puts "We have #{customer_count} customers"
             
+            #delete prior entries and reset the index
+            ShopifyCustomersTags.delete_all
+            ActiveRecord::Base.connection.reset_pk_sequence!('shopify_customers')
+
 
             page_size = 250
             pages = (customer_count / page_size.to_f).ceil
@@ -58,27 +62,40 @@ module BackTag
                 customers.each do |mycust|
                     #puts mycust.inspect
                     puts "#{mycust.attributes['email']}, #{mycust.attributes['tags']}, #{mycust.attributes['id']}"
+
+                    my_shopify_customer = ShopifyCustomersTags.create(shopify_customer_id: mycust.attributes['id'], email: mycust.attributes['email'], created_at: mycust.attributes['created_at'], shopify_tags: mycust.attributes['tags'], first_name: mycust.attributes['first_name'], last_name: mycust.attributes['last_name'])
                     #puts mycust.attributes['tags']
                     #puts mycust.attributes['id']
-                    my_local_id = mycust.attributes['id'].to_s
-                    cust_tag = CustomerTagSubscriptions.find_by_shopify_customer_id(my_local_id)
-                    if !cust_tag.nil?
-                        if !mycust.attributes['tags'].nil?
-                            cust_tag.shopify_tags = mycust.attributes['tags']
-                            cust_tag.save!
-                            puts cust_tag.inspect
-                        else
-                            puts "No tags for this customer, nothing to save"
-                        end
-                    else
-                        puts "Can't find customer from Shopify in Subscription record"
 
-                    end
+
+                    #my_local_id = mycust.attributes['id'].to_s
+                    #cust_tag = CustomerTagSubscriptions.find_by_shopify_customer_id(my_local_id)
+                    #if !cust_tag.nil?
+                    #    if !mycust.attributes['tags'].nil?
+                    #        cust_tag.shopify_tags = mycust.attributes['tags']
+                    #        cust_tag.save!
+                    #        puts cust_tag.inspect
+                    #    else
+                    #        puts "No tags for this customer, nothing to save"
+                    #    end
+                    #else
+                    #    puts "Can't find customer from Shopify in Subscription record"
+
+                    #end
 
                 end
                 puts "Done with page #{page}"
             end
 
+        end
+
+        def add_tags_to_customer_tag_subscriptions
+            update_customer_tag_subscriptions_sql = "update customer_tag_subscriptions set shopify_tags = shopify_customers.shopify_tags from shopify_customers where shopify_customers.shopify_customer_id = customer_tag_subscriptions.shopify_customer_id"
+            ActiveRecord::Base.connection.execute(update_customer_tag_subscriptions_sql)
+            delete_already_ok = "delete from customer_tag_subscriptions where shopify_tags ilike '%recurring_subscription%' "
+            ActiveRecord::Base.connection.execute(delete_already_ok)
+
+        
         end
 
 
@@ -89,6 +106,22 @@ module BackTag
 
 
         end
+
+        def update_only_shopify_customers
+            puts "Now pushing to background only the customers that don't have recurring_subscription tags"
+            Resque.enqueue(BackTagOnlyCustomers)
+        end
+
+
+        class BackTagOnlyCustomers
+            extend ResqueBackTag
+            @queue = "back_tag_only_customers"
+            def self.perform
+                backtag_only_cust
+            end
+
+        end
+
 
         class BackTagCustomers
             extend ResqueBackTag

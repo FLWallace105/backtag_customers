@@ -30,4 +30,17 @@ namespace :back_tag do
         BackTag::UpdateTag.new.update_shopify_customers
     end
 
+    #add_tags_to_customer_tag_subscriptions
+    desc 'final prep for customer_tag_subscriptions'
+    task :final_prep_customer_tag_subscriptions do |t|
+        BackTag::UpdateTag.new.add_tags_to_customer_tag_subscriptions
+    end
+
+    #update_only_shopify_customers
+    desc 'update background only customers with no recurring_subscription tag'
+    task :update_only_shopify_customers do |t|
+        BackTag::UpdateTag.new.update_only_shopify_customers
+    end
+
+
 end

@@ -9,9 +9,67 @@ E, [2018-07-19T16:07:57.876192 #9814] ERROR -- : (Job{back_tag_cust} | BackTag::
 E, [2018-07-19T16:28:38.735414 #10152] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<NoMethodError: undefined method `split' for nil:NilClass>
 I, [2018-07-19T16:43:08.745827 #10315]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
 I, [2018-07-19T16:48:02.384978 #10341]  INFO -- : done: (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | [])
+<<<<<<< HEAD
 I, [2018-07-23T14:36:17.109863 #5763]  INFO -- : Shopify Customer ID for this record = 651284250716
 I, [2018-07-23T14:36:18.338375 #5763]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
 I, [2018-07-23T14:36:22.339104 #5763]  INFO -- : Running 6 seconds
 I, [2018-07-23T14:36:22.339565 #5763]  INFO -- : Continuing on.
 I, [2018-07-23T14:36:22.339919 #5763]  INFO -- : All done with updating customers tags
 I, [2018-07-23T14:36:22.340450 #5763]  INFO -- : done: (Job{back_tag_only_customers} | BackTag::UpdateTag::BackTagOnlyCustomers | [])
+=======
+I, [2018-07-20T17:24:00.508880 #2958]  INFO -- : Shopify Customer ID for this record = 821533474874
+E, [2018-07-20T17:24:01.033941 #2958] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<ActiveResource::ForbiddenAccess: Failed.  Response code = 403.  Response message = Forbidden.>
+E, [2018-07-20T17:30:27.430126 #3441] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<URI::InvalidURIError: bad URI(is not URI?): https://"cba3ec40725d15540062a9bcc9713425":"a2e0df17de352ede6120e157aad16a4d"@ellieactive.myshopify.com/admin>
+I, [2018-07-20T17:34:28.641686 #3806]  INFO -- : Shopify Customer ID for this record = 821533474874
+E, [2018-07-20T17:34:29.300259 #3806] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<ActiveResource::ForbiddenAccess: Failed.  Response code = 403.  Response message = Forbidden.>
+I, [2018-07-20T17:43:04.561910 #4045]  INFO -- : Shopify Customer ID for this record = 821533474874
+I, [2018-07-20T17:43:05.407311 #4045]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:43:09.407623 #4045]  INFO -- : Running 5 seconds
+I, [2018-07-20T17:43:09.407711 #4045]  INFO -- : Continuing on.
+I, [2018-07-20T17:43:09.407773 #4045]  INFO -- : Shopify Customer ID for this record = 819086950458
+I, [2018-07-20T17:43:10.302193 #4045]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:43:14.302509 #4045]  INFO -- : Running 10 seconds
+I, [2018-07-20T17:43:14.302591 #4045]  INFO -- : Continuing on.
+I, [2018-07-20T17:43:14.302649 #4045]  INFO -- : Shopify Customer ID for this record = 5712441042
+E, [2018-07-20T17:43:14.886960 #4045] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<NoMethodError: undefined method `split' for nil:NilClass>
+I, [2018-07-20T17:54:55.170828 #4415]  INFO -- : Shopify Customer ID for this record = 5712441042
+E, [2018-07-20T17:54:55.652823 #4415] ERROR -- : (Job{back_tag_cust} | BackTag::UpdateTag::BackTagCustomers | []) failed: #<NoMethodError: undefined method `split' for nil:NilClass>
+I, [2018-07-20T17:58:40.147436 #4753]  INFO -- : Shopify Customer ID for this record = 5712441042
+I, [2018-07-20T17:58:40.958493 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:58:44.958869 #4753]  INFO -- : Running 5 seconds
+I, [2018-07-20T17:58:44.959001 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:58:44.959074 #4753]  INFO -- : Shopify Customer ID for this record = 308647395346
+I, [2018-07-20T17:58:45.843366 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:58:49.843633 #4753]  INFO -- : Running 10 seconds
+I, [2018-07-20T17:58:49.843731 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:58:49.843796 #4753]  INFO -- : Shopify Customer ID for this record = 627441762362
+I, [2018-07-20T17:58:50.484049 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:58:54.484337 #4753]  INFO -- : Running 15 seconds
+I, [2018-07-20T17:58:54.484426 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:58:54.484498 #4753]  INFO -- : Shopify Customer ID for this record = 796788457530
+I, [2018-07-20T17:58:55.374642 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:58:59.374995 #4753]  INFO -- : Running 20 seconds
+I, [2018-07-20T17:58:59.375131 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:58:59.375289 #4753]  INFO -- : Shopify Customer ID for this record = 796717449274
+I, [2018-07-20T17:59:00.261937 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:59:04.262232 #4753]  INFO -- : Running 25 seconds
+I, [2018-07-20T17:59:04.262323 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:59:04.262391 #4753]  INFO -- : Shopify Customer ID for this record = 796613378106
+I, [2018-07-20T17:59:05.195721 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:59:09.196000 #4753]  INFO -- : Running 30 seconds
+I, [2018-07-20T17:59:09.196093 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:59:09.196156 #4753]  INFO -- : Shopify Customer ID for this record = 625655185466
+I, [2018-07-20T17:59:10.107755 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:59:14.108042 #4753]  INFO -- : Running 35 seconds
+I, [2018-07-20T17:59:14.108134 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:59:14.108197 #4753]  INFO -- : Shopify Customer ID for this record = 626995953722
+I, [2018-07-20T17:59:14.798898 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:59:18.799168 #4753]  INFO -- : Running 39 seconds
+I, [2018-07-20T17:59:18.799278 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:59:18.799371 #4753]  INFO -- : Shopify Customer ID for this record = 684496519226
+I, [2018-07-20T17:59:19.661765 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+I, [2018-07-20T17:59:23.662162 #4753]  INFO -- : Running 44 seconds
+I, [2018-07-20T17:59:23.662238 #4753]  INFO -- : Continuing on.
+I, [2018-07-20T17:59:23.662303 #4753]  INFO -- : Shopify Customer ID for this record = 796568125498
+I, [2018-07-20T17:59:24.473539 #4753]  INFO -- : Saving new recurring_subscription tag to customer on Shopify!
+>>>>>>> 5a5adc5a4d39b8f283663c75db24b5ac125bf44b

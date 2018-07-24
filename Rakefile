@@ -43,4 +43,17 @@ namespace :back_tag do
     end
 
 
+    #quick_get_shopify_customers
+    desc 'quick get all customers with recurring_subscription tag'
+    task :quick_get_all_cust do |t|
+        BackTag::UpdateTag.new.quick_get_shopify_customers
+    end
+
+    #read_customer_tags
+    desc 'read in customer tags from CSV export file'
+    task :read_customer_tags_csv do |t|
+        BackTag::UpdateTag.new.read_customer_tags
+
+    end
+
 end

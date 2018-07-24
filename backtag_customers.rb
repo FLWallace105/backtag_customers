@@ -43,6 +43,39 @@ module BackTag
         end
 
 
+        def quick_get_shopify_customers
+            ShopifyAPI::Base.site = "https://#{@apikey}:#{@password}@#{@shopname}.myshopify.com/admin"     
+            ShopifyCustomersTags.delete_all
+            ActiveRecord::Base.connection.reset_pk_sequence!('shopify_customers')
+
+            customers = ShopifyAPI::Customer.find(:all, params: {limit: 250, query: 'Gay'})
+
+            customers.each do |cust|
+                puts cust.inspect
+            end
+
+            customer_count = ShopifyAPI::Customer.count
+            puts "We have #{customer_count} customers"
+
+        end
+
+        def read_customer_tags
+            ShopifyCustomersTags.delete_all
+            ActiveRecord::Base.connection.reset_pk_sequence!('shopify_customers')
+            CSV.foreach('customers_export.csv', :encoding => 'ISO-8859-1', :headers => true) do |row|
+                first_name = row['First Name']
+                last_name = row['Last Name']
+                email = row['Email']
+                tags = row['Tags']
+                puts "#{first_name}, #{last_name}, #{email}, #{tags}"
+                my_local_shopify_customer = ShopifyCustomersTags.create(first_name: first_name, last_name: last_name, email: email, shopify_tags: tags)
+              end
+
+
+        end
+
+
+
         def get_shopify_customers
             #puts "@apikey = #{@apikey}"
             ShopifyAPI::Base.site = "https://#{@apikey}:#{@password}@#{@shopname}.myshopify.com/admin"
@@ -50,20 +83,26 @@ module BackTag
             puts "We have #{customer_count} customers"
             
             #delete prior entries and reset the index
-            ShopifyCustomersTags.delete_all
-            ActiveRecord::Base.connection.reset_pk_sequence!('shopify_customers')
+            #ShopifyCustomersTags.delete_all
+            #ActiveRecord::Base.connection.reset_pk_sequence!('shopify_customers')
 
 
             page_size = 250
             pages = (customer_count / page_size.to_f).ceil
 
             1.upto(pages) do |page|
-                customers = ShopifyAPI::Customer.find(:all, params: {limit: 250})
+                customers = ShopifyAPI::Customer.find(:all, params: {limit: 250, page: page})
                 customers.each do |mycust|
                     #puts mycust.inspect
                     puts "#{mycust.attributes['email']}, #{mycust.attributes['tags']}, #{mycust.attributes['id']}"
+                    local_shopify_customer = ShopifyCustomersTags.find_by_email(mycust.attributes['email'])
+                    if !local_shopify_customer.nil?
+                        local_shopify_customer.shopify_customer_id = mycust.attributes['id']
+                        local_shopify_customer.save!
+                        puts local_shopify_customer.inspect
+                    end
 
-                    my_shopify_customer = ShopifyCustomersTags.create(shopify_customer_id: mycust.attributes['id'], email: mycust.attributes['email'], created_at: mycust.attributes['created_at'], shopify_tags: mycust.attributes['tags'], first_name: mycust.attributes['first_name'], last_name: mycust.attributes['last_name'])
+                    #my_shopify_customer = ShopifyCustomersTags.create(shopify_customer_id: mycust.attributes['id'], email: mycust.attributes['email'], created_at: mycust.attributes['created_at'], shopify_tags: mycust.attributes['tags'], first_name: mycust.attributes['first_name'], last_name: mycust.attributes['last_name'])
                     #puts mycust.attributes['tags']
                     #puts mycust.attributes['id']
 
@@ -82,9 +121,11 @@ module BackTag
                     #    puts "Can't find customer from Shopify in Subscription record"
 
                     #end
-
+                    
                 end
+                
                 puts "Done with page #{page}"
+                sleep 4
             end
 
         end

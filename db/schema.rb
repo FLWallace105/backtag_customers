@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_201744) do
+ActiveRecord::Schema.define(version: 2018_07_24_032730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -326,15 +326,6 @@ ActiveRecord::Schema.define(version: 2018_07_23_201744) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-  create_table "shopify_customers", force: :cascade do |t|
-    t.string "shopify_customer_id"
-    t.string "email"
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at"
-    t.string "shopify_tags"
-=======
   create_table "shopify_collects", id: :bigint, default: nil, force: :cascade do |t|
     t.bigint "collection_id"
     t.datetime "created_at"
@@ -356,6 +347,17 @@ ActiveRecord::Schema.define(version: 2018_07_23_201744) do
     t.string "sort_order"
     t.string "template_suffix"
     t.string "title"
+    t.datetime "updated_at"
+  end
+
+  create_table "shopify_customers", force: :cascade do |t|
+    t.string "shopify_customer_id"
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at"
+    t.string "shopify_tags"
+    t.boolean "is_updated", default: false
     t.datetime "updated_at"
   end
 
@@ -469,7 +471,6 @@ ActiveRecord::Schema.define(version: 2018_07_23_201744) do
     t.datetime "updated_at"
     t.json "variants"
     t.string "vendor"
->>>>>>> 5a5adc5a4d39b8f283663c75db24b5ac125bf44b
   end
 
   create_table "skip_reasons", force: :cascade do |t|
